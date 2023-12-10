@@ -57,7 +57,7 @@ services:
       - traefik.http.services.wp_${SITE_PATH}.loadbalancer.server.port=8080
       - traefik.http.routers.wp_${SITE_PATH}.tls.certresolver=letsencrypt
       - traefik.frontend.entryPoints=http,https
-      - traefik.http.routers.wp_${SITE_PATH}.rule=Host(`${DOMAIN_NAME}`) && ( PathPrefix(`/${SITE_PATH}`) )
+      - traefik.http.routers.wp_${SITE_PATH}.rule=Host(`${DOMAIN_NAME}`) ##&& ( PathPrefix(`/${SITE_PATH}`) )
     volumes:
       - 'wpdata:/bitnami/wordpress'
     networks: 
@@ -65,17 +65,7 @@ services:
       - mariadb
     depends_on:
       mariadb:
-        condition: service_healthy
-
-  alias:
-    image: docker.io/bitnami/wp:4.2
-    container_name: "alias_${SITE_PATH}"
-    volumes:
-      - 'wp_www:/bitnami/wp'
-    command: bash -c "sleep 120s ; ln -fs /bitnami/wp/ /bitnami/wp/${SITE_PATH}"
-    depends_on:
-      - webserver
-    
+        condition: service_healthy    
 
 volumes:
   mariadb_data:
