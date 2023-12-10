@@ -52,6 +52,7 @@ services:
       - WORDPRESS_EMAIL
       - WORDPRESS_LANG
       - WORDPRESS_SKIP_BOOTSTRAP=no
+      - WORDPRESS_ENABLE_REVERSE_PROXY=yes
     labels:
       - traefik.enable=true
       - traefik.http.services.wp_${SITE_PATH}.loadbalancer.server.port=8080
