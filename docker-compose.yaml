@@ -6,7 +6,7 @@ version: '3'
 
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:latest
+    image: docker.io/bitnami/mariadb:10
     container_name: "mariadb"
     restart: unless-stopped
     environment:
@@ -40,7 +40,7 @@ services:
       - PHP_POST_MAX_SIZE
       - PHP_UPLOAD_MAX_FILESIZE
       - PHP_MEMORY_LIMIT=256M
-      - WORDPRESS_HOST=${DOMAIN_NAME}/${SITE_PATH}
+      - WORDPRESS_HOST=${DOMAIN_NAME} ##/${SITE_PATH}
       - WORDPRESS_SSLPROXY=true
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_NAME=${SITE_PATH}
